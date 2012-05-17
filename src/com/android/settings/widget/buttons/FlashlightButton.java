@@ -17,7 +17,7 @@ import java.util.List;
 
 public class FlashlightButton extends WidgetButton {
 
-    static FlashlightButton ownButton = null;
+    private static final FlashlightButton ownButton = new FlashlightButton();
 
     public void updateState(Context context, SharedPreferences globalPreferences, int[] appWidgetIds) {
         if (getFlashlightEnabled(context)) {
@@ -44,8 +44,6 @@ public class FlashlightButton extends WidgetButton {
     }
 
     public static FlashlightButton getInstance() {
-        if (ownButton == null)
-            ownButton = new FlashlightButton();
         return ownButton;
     }
 

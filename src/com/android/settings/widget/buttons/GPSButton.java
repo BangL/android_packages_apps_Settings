@@ -13,7 +13,7 @@ import android.provider.Settings;
 
 public class GPSButton extends WidgetButton {
 
-    static GPSButton ownButton = null;
+    private static final GPSButton ownButton = new GPSButton();
 
     public void updateState(Context context, SharedPreferences globalPreferences, int[] appWidgetIds) {
         if (getGpsState(context)) {
@@ -50,9 +50,6 @@ public class GPSButton extends WidgetButton {
     }
 
     public static GPSButton getInstance() {
-        if (ownButton == null)
-            ownButton = new GPSButton();
-
         return ownButton;
     }
 

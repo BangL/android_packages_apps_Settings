@@ -15,7 +15,7 @@ public class MobileDataButton extends WidgetButton {
 
     public static final String MOBILE_DATA_CHANGED = "com.android.internal.telephony.MOBILE_DATA_CHANGED";
 
-    static MobileDataButton ownButton = null;
+    private static final MobileDataButton ownButton = new MobileDataButton();
 
     static boolean stateChangeRequest = false;
     static Boolean intendedState = null;
@@ -102,9 +102,6 @@ public class MobileDataButton extends WidgetButton {
     }
 
     public static MobileDataButton getInstance() {
-        if (ownButton == null)
-            ownButton = new MobileDataButton();
-
         return ownButton;
     }
 

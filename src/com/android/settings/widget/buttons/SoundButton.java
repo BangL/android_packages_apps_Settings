@@ -12,7 +12,7 @@ import android.provider.Settings;
 
 public class SoundButton extends WidgetButton {
 
-    static SoundButton ownButton = null;
+    private static final SoundButton ownButton = new SoundButton();
 
     public static final int RINGER_MODE_UNKNOWN = 0;
 
@@ -215,9 +215,6 @@ public class SoundButton extends WidgetButton {
     }
 
     public static SoundButton getInstance() {
-        if (ownButton == null)
-            ownButton = new SoundButton();
-
         return ownButton;
     }
 

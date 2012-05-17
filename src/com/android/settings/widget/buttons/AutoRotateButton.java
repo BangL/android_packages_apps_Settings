@@ -11,7 +11,7 @@ import android.provider.Settings;
 
 public class AutoRotateButton extends WidgetButton {
 
-    static AutoRotateButton ownButton = null;
+    private static final AutoRotateButton ownButton = new AutoRotateButton();
 
     @Override
     public void toggleState(Context context) {
@@ -41,11 +41,7 @@ public class AutoRotateButton extends WidgetButton {
     }
 
     public static AutoRotateButton getInstance() {
-        if (ownButton == null)
-            ownButton = new AutoRotateButton();
-
         return ownButton;
-
     }
 
     @Override

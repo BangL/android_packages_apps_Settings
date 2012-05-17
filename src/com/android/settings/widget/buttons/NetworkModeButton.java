@@ -34,7 +34,7 @@ public class NetworkModeButton extends WidgetButton {
 
     private static final int DEFAULT_SETTTING = 0;
 
-    static NetworkModeButton ownButton = null;
+    private static final NetworkModeButton ownButton = new NetworkModeButton();
 
     private static int networkMode = NO_NETWORK_MODE_YET;
 
@@ -79,8 +79,6 @@ public class NetworkModeButton extends WidgetButton {
     }
 
     public static NetworkModeButton getInstance() {
-        if (ownButton == null)
-            ownButton = new NetworkModeButton();
         return ownButton;
     }
 

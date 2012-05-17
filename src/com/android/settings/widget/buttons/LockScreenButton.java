@@ -19,7 +19,7 @@ public class LockScreenButton extends WidgetButton {
 
     public static final String LOCK_SCREEN = "lockScreen";
 
-    static LockScreenButton ownButton = null;
+    private static final LockScreenButton ownButton = new LockScreenButton();
 
     KeyguardLock lock;
 
@@ -95,9 +95,6 @@ public class LockScreenButton extends WidgetButton {
     }
 
     public static LockScreenButton getInstance() {
-        if (ownButton == null)
-            ownButton = new LockScreenButton();
-
         return ownButton;
     }
 

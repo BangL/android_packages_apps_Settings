@@ -12,7 +12,7 @@ import android.provider.Settings;
 
 public class AirplaneButton extends WidgetButton {
 
-    static AirplaneButton ownButton = null;
+    private static final AirplaneButton ownButton = new AirplaneButton();
 
     public void updateState(Context context, SharedPreferences globalPreferences, int[] appWidgetIds) {
         if (getState(context)) {
@@ -52,9 +52,6 @@ public class AirplaneButton extends WidgetButton {
     }
 
     public static AirplaneButton getInstance() {
-        if (ownButton == null)
-            ownButton = new AirplaneButton();
-
         return ownButton;
     }
 

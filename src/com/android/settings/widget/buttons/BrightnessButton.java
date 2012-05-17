@@ -46,7 +46,7 @@ public class BrightnessButton extends WidgetButton {
 
     private static Boolean supportsAutomaticMode = null;
 
-    static BrightnessButton ownButton = null;
+    private static final BrightnessButton ownButton = new BrightnessButton();
 
     private static int currentMode;
 
@@ -188,9 +188,6 @@ public class BrightnessButton extends WidgetButton {
     }
 
     public static BrightnessButton getInstance() {
-        if (ownButton == null)
-            ownButton = new BrightnessButton();
-
         return ownButton;
     }
 

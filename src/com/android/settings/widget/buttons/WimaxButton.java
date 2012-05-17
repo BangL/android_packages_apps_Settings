@@ -18,7 +18,7 @@ public class WimaxButton extends WidgetButton {
 
     private static final StateTracker sWimaxState = new WimaxStateTracker();
 
-    static WimaxButton ownButton = null;
+    private static final WimaxButton ownButton = new WimaxButton();
 
     /**
      * Subclass of StateTracker to get/set Bluetooth state.
@@ -93,9 +93,6 @@ public class WimaxButton extends WidgetButton {
     }
 
     public static WimaxButton getInstance() {
-        if (ownButton == null)
-            ownButton = new WimaxButton();
-
         return ownButton;
     }
 

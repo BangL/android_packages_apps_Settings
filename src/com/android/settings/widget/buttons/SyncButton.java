@@ -12,7 +12,7 @@ import android.net.ConnectivityManager;
 
 public class SyncButton extends WidgetButton {
 
-    static SyncButton ownButton = null;
+    private static final SyncButton ownButton = new SyncButton();
 
     /**
      * Toggle auto-sync
@@ -93,9 +93,6 @@ public class SyncButton extends WidgetButton {
     }
 
     public static SyncButton getInstance() {
-        if (ownButton == null)
-            ownButton = new SyncButton();
-
         return ownButton;
     }
 

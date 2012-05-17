@@ -15,7 +15,7 @@ import android.util.Log;
 
 public class WifiApButton extends WidgetButton {
 
-    static WifiApButton ownButton = null;
+    private static final WifiApButton ownButton = new WifiApButton();
 
     private static final StateTracker sWifiApState = new WifiApStateTracker();
 
@@ -129,10 +129,6 @@ public class WifiApButton extends WidgetButton {
     }
 
     public static WifiApButton getInstance() {
-        if (ownButton == null) {
-            ownButton = new WifiApButton();
-        }
-
         return ownButton;
     }
 

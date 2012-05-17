@@ -27,7 +27,7 @@ public class ScreenTimeoutButton extends WidgetButton {
 
     private static final int DEFAULT_SETTTING = 0;
 
-    static ScreenTimeoutButton ownButton = null;
+    private static final ScreenTimeoutButton ownButton = new ScreenTimeoutButton();
 
     private int currentMode;
 
@@ -74,9 +74,6 @@ public class ScreenTimeoutButton extends WidgetButton {
     }
 
     public static ScreenTimeoutButton getInstance() {
-        if (ownButton == null)
-            ownButton = new ScreenTimeoutButton();
-
         return ownButton;
     }
 

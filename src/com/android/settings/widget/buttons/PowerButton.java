@@ -10,7 +10,7 @@ import android.content.SharedPreferences;
 
 public class PowerButton extends WidgetButton {
 
-    private static PowerButton ownButton;
+    private static final PowerButton ownButton = new PowerButton();
 
     @Override
     void initButton() {
@@ -54,9 +54,6 @@ public class PowerButton extends WidgetButton {
     }
 
     public static PowerButton getInstance() {
-        if (ownButton == null)
-            ownButton = new PowerButton();
-
         return ownButton;
     }
 }

@@ -20,7 +20,7 @@ public class BluetoothButton extends WidgetButton {
 
     private static final StateTracker sBluetoothState = new BluetoothStateTracker();
 
-    static BluetoothButton ownButton = null;
+    private static final BluetoothButton ownButton = new BluetoothButton();
 
     /**
      * Subclass of StateTracker to get/set Bluetooth state.
@@ -88,11 +88,7 @@ public class BluetoothButton extends WidgetButton {
     }
 
     public static BluetoothButton getInstance() {
-        if (ownButton == null)
-            ownButton = new BluetoothButton();
-
         return ownButton;
-
     }
 
     @Override
