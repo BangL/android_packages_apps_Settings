@@ -549,4 +549,18 @@
         <item>5000</item>
         <item>10000</item>
     </integer-array>
+
+    <string-array name="pref_pattern_style_entries" translatable="false">
+        <item>@string/ringlock_style_entry_dots</item>
+        <item>@string/ringlock_style_entry_revamped</item>
+        <item>@string/ringlock_style_entry_holo</item>
+        <item>@string/ringlock_style_entry_blade</item>
+    </string-array>
+
+    <string-array name="pref_pattern_style_values" translatable="false">
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+        <item>4</item>
+    </string-array>
 </resources>

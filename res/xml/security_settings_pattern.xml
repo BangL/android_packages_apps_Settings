@@ -26,6 +26,13 @@
             android:summary="@string/unlock_set_unlock_launch_picker_change_summary"
             android:persistent="false"/>
 
+        <ListPreference android:key="pattern_style_pref"
+            android:dialogTitle="@string/pref_pattern_style_title"
+            android:title="@string/pref_pattern_style_title"
+            android:summary="@string/pref_pattern_style_summary"
+            android:entries="@array/pref_pattern_style_entries"
+            android:entryValues="@array/pref_pattern_style_values"/>
+
         <CheckBoxPreference
             android:key="visiblepattern"
             android:title="@string/lockpattern_settings_enable_visible_pattern_title"/>

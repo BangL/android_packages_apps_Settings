@@ -43,6 +43,7 @@ import android.preference.PreferenceCategory;
 import android.preference.PreferenceManager;
 import android.preference.PreferenceScreen;
 import android.preference.Preference.OnPreferenceChangeListener;
+import android.provider.CmSystem.RinglockStyle;
 import android.provider.Settings;
 import android.security.Credentials;
 import android.security.KeyStore;
@@ -71,6 +72,7 @@ public class SecuritySettings extends PreferenceActivity implements OnPreference
     private static final String ICC_LOCK_SETTINGS = PACKAGE + ".IccLockSettings";
 
     private static final String KEY_LOCK_ENABLED = "lockenabled";
+    private static final String PATTERN_STYLE_PREF = "pattern_style_pref";
     private static final String KEY_VISIBLE_PATTERN = "visiblepattern";
     private static final String KEY_SHOW_ERROR_PATH = "show_error_path";
     private static final String KEY_TACTILE_FEEDBACK_ENABLED = "unlock_tactile_feedback";
@@ -80,6 +82,7 @@ public class SecuritySettings extends PreferenceActivity implements OnPreference
     private static final String PROPERTY_EFS_ENABLED = "persist.security.efs.enabled";
     private static final String PROPERTY_EFS_TRANSITION = "persist.security.efs.trans";
 
+    private ListPreference mPatternStylePref;
     private CheckBoxPreference mVisiblePattern;
     private CheckBoxPreference mShowErrorPath;
     private CheckBoxPreference mTactileFeedback;
@@ -103,6 +106,7 @@ public class SecuritySettings extends PreferenceActivity implements OnPreference
     private CheckBoxPreference mNetwork;
     private CheckBoxPreference mGps;
     private CheckBoxPreference mAssistedGps;
+    private ListPreference mBtPref;
 
     DevicePolicyManager mDPM;
 
@@ -133,7 +137,7 @@ public class SecuritySettings extends PreferenceActivity implements OnPreference
         updateToggles();
 
         //add BT gps devices
-        ListPreference btpref = (ListPreference) findPreference("location_gps_source");
+        mBtPref = (ListPreference) findPreference("location_gps_source");
         ArrayList<CharSequence> entries = new ArrayList<CharSequence>();
         for (String e : getResources().getStringArray(R.array.location_entries_gps_source) ) {
             entries.add(e);
@@ -151,10 +155,10 @@ public class SecuritySettings extends PreferenceActivity implements OnPreference
                 values.add(d.getAddress());
             }
         }
-        btpref.setEntries(entries.toArray(new CharSequence[entries.size()]));
-        btpref.setEntryValues(values.toArray(new CharSequence[values.size()]));
-        btpref.setDefaultValue("0");
-        btpref.setOnPreferenceChangeListener(this);
+        mBtPref.setEntries(entries.toArray(new CharSequence[entries.size()]));
+        mBtPref.setEntryValues(values.toArray(new CharSequence[values.size()]));
+        mBtPref.setDefaultValue("0");
+        mBtPref.setOnPreferenceChangeListener(this);
 
         
         // listen for Location Manager settings changes
@@ -168,31 +172,39 @@ public class SecuritySettings extends PreferenceActivity implements OnPreference
 
     @Override
     public boolean onPreferenceChange(Preference preference, Object newValue) {
-        String oldPref = Settings.System.getString(getContentResolver(),
-                Settings.Secure.EXTERNAL_GPS_BT_DEVICE);
-        String newPref = newValue == null ? "0" : (String) newValue;
-        // "0" represents the internal GPS.
-        Settings.System.putString(getContentResolver(), Settings.Secure.EXTERNAL_GPS_BT_DEVICE,
-                newPref);
-        if (!oldPref.equals(newPref) && ("0".equals(oldPref) || "0".equals(newPref)) ) {
-            LocationManager locationManager = 
-                (LocationManager) this.getSystemService(Context.LOCATION_SERVICE);
-            locationManager.setGPSSource(newPref);
+        if (preference == mBtPref) {
+            String oldPref = Settings.System.getString(getContentResolver(),
+                    Settings.Secure.EXTERNAL_GPS_BT_DEVICE);
+            String newPref = newValue == null ? "0" : (String) newValue;
+            // "0" represents the internal GPS.
+            Settings.System.putString(getContentResolver(), Settings.Secure.EXTERNAL_GPS_BT_DEVICE,
+                    newPref);
+            if (!oldPref.equals(newPref) && ("0".equals(oldPref) || "0".equals(newPref)) ) {
+                LocationManager locationManager =
+                    (LocationManager) this.getSystemService(Context.LOCATION_SERVICE);
+                locationManager.setGPSSource(newPref);
 
-            // Show dialog to inform user that source has been switched
-            AlertDialog alertDialog = new AlertDialog.Builder(this).create();
-            alertDialog.setTitle(R.string.location_gps_source_notification_title);
-            alertDialog.setMessage(getResources().getString(R.string.location_gps_source_notification));
-            alertDialog.setButton(DialogInterface.BUTTON_POSITIVE,
-                    getResources().getString(com.android.internal.R.string.ok),
-                    new DialogInterface.OnClickListener() {
-                public void onClick(DialogInterface dialog, int which) {
-                    return;
-                }
-            });
-            alertDialog.show();
+                // Show dialog to inform user that source has been switched
+                AlertDialog alertDialog = new AlertDialog.Builder(this).create();
+                alertDialog.setTitle(R.string.location_gps_source_notification_title);
+                alertDialog.setMessage(getResources().getString(R.string.location_gps_source_notification));
+                alertDialog.setButton(DialogInterface.BUTTON_POSITIVE,
+                        getResources().getString(com.android.internal.R.string.ok),
+                        new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        return;
+                    }
+                });
+                alertDialog.show();
+            }
+            return true;
+        } else if (preference == mPatternStylePref) {
+            RinglockStyle patternStyle = RinglockStyle.getStyleById((String) newValue);
+            Settings.System.putInt(getContentResolver(), Settings.System.PATTERN_STYLE_PREF,
+                    RinglockStyle.getIdByStyle(patternStyle));
+            return true;
         }
-        return true;
+        return false;
     }
 
     
@@ -233,6 +245,9 @@ public class SecuritySettings extends PreferenceActivity implements OnPreference
 
         // set or change current. Should be common to all unlock preference screens
         // mSetOrChange = (PreferenceScreen) pm.findPreference(KEY_UNLOCK_SET_OR_CHANGE);
+
+        // pattern style pref
+        mPatternStylePref = (ListPreference) pm.findPreference(PATTERN_STYLE_PREF);
 
         // visible pattern
         mVisiblePattern = (CheckBoxPreference) pm.findPreference(KEY_VISIBLE_PATTERN);
@@ -305,6 +320,13 @@ public class SecuritySettings extends PreferenceActivity implements OnPreference
         super.onResume();
 
         final LockPatternUtils lockPatternUtils = mChooseLockSettingsHelper.utils();
+        if (mPatternStylePref != null) {
+            RinglockStyle patternStyle = RinglockStyle.getStyleById(
+                    Settings.System.getInt(getContentResolver(),
+                    Settings.System.PATTERN_STYLE_PREF, RinglockStyle.getIdByStyle(RinglockStyle.Bubble)));
+            mPatternStylePref.setValue(String.valueOf(RinglockStyle.getIdByStyle(patternStyle)));
+            mPatternStylePref.setOnPreferenceChangeListener(this);
+        }
         if (mVisiblePattern != null) {
             boolean visible = lockPatternUtils.isVisiblePatternEnabled();
             mVisiblePattern.setChecked(visible);
@@ -354,7 +376,7 @@ public class SecuritySettings extends PreferenceActivity implements OnPreference
             intent.setComponent(component);
             intent.setAction(Intent.ACTION_MAIN);
             startActivityForResult(intent, TSM_RESULT);
-        }else if (preference == mShowPassword) {
+        } else if (preference == mShowPassword) {
             Settings.System.putInt(getContentResolver(), Settings.System.TEXT_SHOW_PASSWORD,
                     mShowPassword.isChecked() ? 1 : 0);
         } else if (preference == mNetwork) {

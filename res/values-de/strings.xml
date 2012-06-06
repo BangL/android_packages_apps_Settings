@@ -1395,4 +1395,11 @@
     <string name="increasing_ring_interval_3seconds">3 Sekunden</string>
     <string name="increasing_ring_interval_5seconds">5 Sekunden</string>
     <string name="increasing_ring_interval_10seconds">10 Sekunden</string>
+
+    <string name="pref_pattern_style_title">Muster-Stil</string>
+    <string name="pref_pattern_style_summary">Aussehen des Sperrmusters anpassen</string>
+    <string name="ringlock_style_entry_dots">Standard (Punkte)</string>
+    <string name="ringlock_style_entry_revamped">Umgestaltet</string>
+    <string name="ringlock_style_entry_holo">Holo</string>
+    <string name="ringlock_style_entry_blade">Scheiben</string>
 </resources>

@@ -1464,4 +1464,12 @@
     <string name="increasing_ring_interval_3seconds">3 秒</string>
     <string name="increasing_ring_interval_5seconds">5 秒</string>
     <string name="increasing_ring_interval_10seconds">10 秒</string>
+
+    <!-- Style for pattern lockscreen rings -->
+    <string name="pref_pattern_style_title">ロック解除パターンスタイル</string>
+    <string name="pref_pattern_style_summary">ロック解除パターンのリングスタイルを選択</string>
+    <string name="ringlock_style_entry_dots">デフォルトスタイル</string>
+    <string name="ringlock_style_entry_revamped">リヴァンプスタイル</string>
+    <string name="ringlock_style_entry_holo">ホロスタイル</string>
+    <string name="ringlock_style_entry_blade">ブレードスタイル</string>
 </resources>

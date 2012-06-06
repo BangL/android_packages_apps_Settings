@@ -1572,4 +1572,12 @@
     <string name="increasing_ring_interval_3seconds">3 segundos</string>
     <string name="increasing_ring_interval_5seconds">5 segundos</string>
     <string name="increasing_ring_interval_10seconds">10 segundos</string>
+
+    <!-- Style for pattern lockscreen rings -->
+    <string name="pref_pattern_style_title">Estilo bloqueo por patrón</string>
+    <string name="pref_pattern_style_summary">Escoge un estilo para los anillos del patrón de desbloqueo</string>
+    <string name="ringlock_style_entry_dots">Estilo clásico</string>
+    <string name="ringlock_style_entry_revamped">Estilo renovado</string>
+    <string name="ringlock_style_entry_holo">Estilo Holo</string>
+    <string name="ringlock_style_entry_blade">Estilo Blade</string>
 </resources>
