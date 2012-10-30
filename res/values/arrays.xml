@@ -1406,6 +1406,26 @@
         <item>2</item>
     </string-array>
 
+    <string-array name="on_screen_buttons_height_entries" translatable="false">
+        <item>Turn off</item>
+        <item>24dp</item>
+        <item>30dp</item>
+        <item>32dp</item>
+        <item>36dp</item>
+        <item>48dp</item>
+        <item>60dp</item>
+    </string-array>
+
+    <string-array name="on_screen_buttons_height_values" translatable="false">
+        <item>0</item>
+        <item>24</item>
+        <item>30</item>
+        <item>32</item>
+        <item>36</item>
+        <item>48</item>
+        <item>60</item>
+    </string-array>
+
     <string-array name="lockscreen_battery_status_entries" translatable="false">
         <item>@string/lockscreen_battery_status_charging</item>
         <item>@string/lockscreen_battery_status_alwayson</item>

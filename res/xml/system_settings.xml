@@ -54,8 +54,15 @@
 
     <PreferenceScreen
         android:key="navigation_bar"
+        android:fragment="com.android.settings.cyanogenmod.NavigationBar"
+        android:title="@string/combined_navigation_bar_title" 
+        android:summary="@string/navigation_bar_summary" />
+
+    <PreferenceScreen
+        android:key="navigation_bar"
         android:fragment="com.android.settings.cyanogenmod.NavBar"
-        android:title="@string/navigation_bar_title" />
+        android:title="@string/navigation_bar_title"
+        android:summary="@string/navigation_bar_summary1" />
 
     <PreferenceScreen
         android:key="hardware_keys"
