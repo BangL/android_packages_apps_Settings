@@ -4412,6 +4412,8 @@
     <string name="status_bar_toggle_info">Automatic brightness is enabled</string>
     <string name="status_bar_signal_text_title">Signal status style</string>
     <string name="status_bar_style_icon">Icon</string>
+    <string name="status_bar_style_hidden">Hidden</string>
+    <string name="status_bar_signal_text_show_bars">Icon (default)</string>
     <string name="status_bar_signal_text_show_text">Text</string>
     <string name="status_bar_signal_text_show_bars_text">Icon and Text</string>
     <string name="status_bar_signal_text_hidden">Hidden</string>
