@@ -17,6 +17,7 @@
 package com.android.settings;
 
 import android.app.AlertDialog;
+import android.app.INotificationManager;
 import android.app.Dialog;
 import android.app.DialogFragment;
 import android.content.DialogInterface;
@@ -52,6 +53,9 @@ public class UserInterface extends SettingsPreferenceFragment implements OnPrefe
     private static final String KEY_POWER_CRT_SCREEN_OFF = "system_power_crt_screen_off";
     private static final String KEY_DUAL_PANE = "dual_pane";
     private static final String KEY_RECENTS_RAM_BAR = "recents_ram_bar";
+    private static final String KEY_HALO_STATE = "halo_state";
+    private static final String KEY_HALO_HIDE = "halo_hide";
+    private static final String KEY_HALO_REVERSED = "halo_reversed";
 
     private Preference mLcdDensity;
     private Preference mCustomLabel;
@@ -63,10 +67,17 @@ public class UserInterface extends SettingsPreferenceFragment implements OnPrefe
     private Preference mRamBar;
     private CheckBoxPreference mDualPane;
 
+    private ListPreference mHaloState;
+    private CheckBoxPreference mHaloHide;
+    private CheckBoxPreference mHaloReversed;
+
     private boolean mIsCrtOffChecked = false;
 
     private String mCustomLabelText = null;
     private int newDensityValue;
+
+    private Context mContext;
+    private INotificationManager mNotificationManager;
 
     DensityChanger densityFragment;
 
@@ -77,6 +88,22 @@ public class UserInterface extends SettingsPreferenceFragment implements OnPrefe
         addPreferencesFromResource(R.xml.user_interface_settings);
 
         PreferenceScreen prefs = getPreferenceScreen();
+        mContext = getActivity();
+
+        mNotificationManager = INotificationManager.Stub.asInterface(
+                ServiceManager.getService(Context.NOTIFICATION_SERVICE));
+
+        mHaloState = (ListPreference) prefSet.findPreference(KEY_HALO_STATE);
+        mHaloState.setValue(String.valueOf((isHaloPolicyBlack() ? "1" : "0")));
+        mHaloState.setOnPreferenceChangeListener(this);
+
+        mHaloHide = (CheckBoxPreference) prefSet.findPreference(KEY_HALO_HIDE);
+        mHaloHide.setChecked(Settings.System.getInt(mContext.getContentResolver(),
+                Settings.System.HALO_HIDE, 0) == 1);
+
+        mHaloReversed = (CheckBoxPreference) prefSet.findPreference(KEY_HALO_REVERSED);
+        mHaloReversed.setChecked(Settings.System.getInt(mContext.getContentResolver(),
+                Settings.System.HALO_REVERSED, 1) == 1);
 
         mCustomLabel = findPreference(PREF_CUSTOM_CARRIER_LABEL);
         updateCustomLabelTextSummary();
@@ -141,6 +168,15 @@ public class UserInterface extends SettingsPreferenceFragment implements OnPrefe
         }
     }
 
+    private boolean isHaloPolicyBlack() {
+        try {
+            return mNotificationManager.isHaloPolicyBlack();
+        } catch (android.os.RemoteException ex) {
+                // System dead
+        }
+        return true;
+    }
+
     private void updateRamBar() {
         int ramBarMode = Settings.System.getInt(getActivity().getApplicationContext().getContentResolver(),
                 Settings.System.RECENTS_RAM_BAR_MODE, 0);
@@ -185,6 +221,14 @@ public class UserInterface extends SettingsPreferenceFragment implements OnPrefe
             return true;
         }
         return false;
+        } else if (preference == mHaloState) {
+            boolean state = Integer.valueOf((String) newValue) == 1;
+            try {
+                mNotificationManager.setHaloPolicyBlack(state);
+            } catch (android.os.RemoteException ex) {
+                // System dead
+            }          
+            return true;
     }
 
     @Override
@@ -195,6 +239,14 @@ public class UserInterface extends SettingsPreferenceFragment implements OnPrefe
                     Settings.System.SYSTEM_POWER_ENABLE_CRT_OFF,
                     mCrtOff.isChecked() ? 1 : 0);
             return true;
+        } else if (preference == mHaloHide) {	
+            Settings.System.putInt(mContext.getContentResolver(),
+                    Settings.System.HALO_HIDE, mHaloHide.isChecked()
+                    ? 1 : 0);	
+        } else if (preference == mHaloReversed) {	
+            Settings.System.putInt(mContext.getContentResolver(),
+                    Settings.System.HALO_REVERSED, mHaloReversed.isChecked()
+                    ? 1 : 0);
         } else if (preference == mCustomLabel) {
             AlertDialog.Builder alert = new AlertDialog.Builder(getActivity());
             alert.setTitle(R.string.custom_carrier_label_title);
@@ -224,6 +276,7 @@ public class UserInterface extends SettingsPreferenceFragment implements OnPrefe
             });
 
             alert.show();
+
          }
  
          return super.onPreferenceTreeClick(preferenceScreen, preference);
