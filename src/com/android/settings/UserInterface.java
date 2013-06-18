@@ -16,6 +16,7 @@
 
 package com.android.settings;
 
+import android.app.ActivityManager;
 import android.app.AlertDialog;
 import android.app.INotificationManager;
 import android.app.Dialog;
@@ -56,6 +57,7 @@ public class UserInterface extends SettingsPreferenceFragment implements OnPrefe
     private static final String KEY_HALO_STATE = "halo_state";
     private static final String KEY_HALO_HIDE = "halo_hide";
     private static final String KEY_HALO_REVERSED = "halo_reversed";
+    private static final String KEY_HALO_PAUSE = "halo_pause";
 
     private Preference mLcdDensity;
     private Preference mCustomLabel;
@@ -70,6 +72,7 @@ public class UserInterface extends SettingsPreferenceFragment implements OnPrefe
     private ListPreference mHaloState;
     private CheckBoxPreference mHaloHide;
     private CheckBoxPreference mHaloReversed;
+    private CheckBoxPreference mHaloPause;
 
     private boolean mIsCrtOffChecked = false;
 
@@ -88,6 +91,7 @@ public class UserInterface extends SettingsPreferenceFragment implements OnPrefe
         addPreferencesFromResource(R.xml.user_interface_settings);
 
         PreferenceScreen prefs = getPreferenceScreen();
+        PreferenceScreen prefSet = getPreferenceScreen();
         mContext = getActivity();
 
         mNotificationManager = INotificationManager.Stub.asInterface(
@@ -104,6 +108,11 @@ public class UserInterface extends SettingsPreferenceFragment implements OnPrefe
         mHaloReversed = (CheckBoxPreference) prefSet.findPreference(KEY_HALO_REVERSED);
         mHaloReversed.setChecked(Settings.System.getInt(mContext.getContentResolver(),
                 Settings.System.HALO_REVERSED, 1) == 1);
+
+        int isLowRAM = (ActivityManager.isLargeRAM()) ? 0 : 1;
+        mHaloPause = (CheckBoxPreference) prefSet.findPreference(KEY_HALO_PAUSE);
+        mHaloPause.setChecked(Settings.System.getInt(mContext.getContentResolver(),
+                Settings.System.HALO_PAUSE, isLowRAM) == 1);
 
         mCustomLabel = findPreference(PREF_CUSTOM_CARRIER_LABEL);
         updateCustomLabelTextSummary();
@@ -246,6 +255,10 @@ public class UserInterface extends SettingsPreferenceFragment implements OnPrefe
         } else if (preference == mHaloReversed) {	
             Settings.System.putInt(mContext.getContentResolver(),
                     Settings.System.HALO_REVERSED, mHaloReversed.isChecked()
+                    ? 1 : 0);
+         } else if (preference == mHaloPause) {
+            Settings.System.putInt(mContext.getContentResolver(),
+                    Settings.System.HALO_PAUSE, mHaloPause.isChecked()
                     ? 1 : 0);
         } else if (preference == mCustomLabel) {
             AlertDialog.Builder alert = new AlertDialog.Builder(getActivity());
