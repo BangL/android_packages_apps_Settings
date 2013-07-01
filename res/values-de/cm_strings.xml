@@ -438,6 +438,7 @@
     <string name="ime_switcher_notify">Auswahlbenachrichtigung</string>
     <string name="ime_switcher_notify_summary">Benachrichtigung zur Auswahl der Eingabemethode in der Statusleiste anzeigen</string>
     <string name="status_bar_title">Statusleiste</string>
+    <string name="status_bar_clock">Uhrzeit und Datum</string>
     <string name="status_bar_clock_title">Uhrzeit</string>
     <string name="status_bar_general_title">Allgemein</string>
     <string name="status_bar_show_clock_title">Uhr anzeigen</string>
@@ -814,7 +815,31 @@ Mittels \"Entfernen\" kann die ausgewählte Stützstelle aus dem Helligkeitsverl
     <string name="hardware_keys_action_power">Ausschalten</string>
     <string name="hardware_keys_action_custom_app">Eigene App</string>
     <!-- temasek misc end -->
-
+    
+    <!-- BangL misc start -->
+    <string name="battery_bar">Position</string>
+    <string name="battery_bar_color">Farbe</string>
+    <string name="battery_bar_cat">Akkuleiste</string>
+    <string name="battery_bar_style_title">Stil</string>
+    <string name="battery_bar_thickness_title">Dicke</string>
+    <string name="battery_bar_animate_title">Ladeanimation</string>
+    <string name="battery_bar_animate_summary">Die Ladeanimation kann die Leistung des Telefons negativ beeinflussen.</string>
+    <string name="dialog_color_picker">Farbauswahl</string>
+    <string name="press_color_to_apply">Farbe berühren zum Übernehmen</string>
+    <string name="power_widget_additional_options_cat">Zusätzliche Optionen</string>
+    <string name="brightness_location_title">Helligkeitsregler</string>
+    <!-- Navigation bar background style -->
+    <string name="nav_bar_transparency_title">Transparenz</string>
+    <string name="nav_bar_color_title">Farbe</string>
+    <string name="nav_bar_background_style">Navigationsleisten Hintergrund</string>
+    <string name="nav_bar_alpha_mode_dialog_text_title">Navigations und Statusleisten Transparenz</string>
+    <string name="nav_bar_alpha_mode_text_title">Transparenzmodus</string>
+    <string name="nav_bar_alpha_mode_home">Launcher</string>
+    <string name="nav_bar_alpha_mode_default">Launcher und Lockscreen</string>
+    <string name="nav_bar_alpha_mode_always">Immer</string>
+    <string name="nav_bar_style_reset">Zurücksetzen</string>
+    <!-- BangL misc end -->
+    
     <!-- Pie control -->
     <string name="pie_control_title">Pie-Navigation</string>
     <string name="pie_control_enabled">Ist bei erweitertem Desktop aktiviert</string>
@@ -831,6 +856,14 @@ Mittels \"Entfernen\" kann die ausgewählte Stützstelle aus dem Helligkeitsverl
     <string name="pie_control_trigger_right">Rechter Bildschirmrand</string>
     <string name="pie_control_trigger_top">Oberer Bildschirmrand</string>
     <string name="pie_control_trigger_top_summary">Es werden nur die Navigationstasten angezeigt</string>
+    <string name="pie_control_color_settings">Pie Farbeinstellungen</string>
+    <string name="pie_control_color_normal">Normaler Hintergrund</string>
+    <string name="pie_control_color_selected">Ausgewählter Hintergrund</string>
+    <string name="pie_control_color_longpressed">Lange-Drücken Hintergrund</string>
+    <string name="pie_control_color_icon">Symbolfarbe</string>
+    <string name="pie_control_outline">Rand</string>
+    <string name="pie_control_color_title">Farbeinstellung bearbeiten</string>
+    <string name="pie_control_color_reset">Zurücksetzen</string>
     <string name="wifi_mode">Modus</string>
     <string name="wifi_mode_ibss">Ad-Hoc-Netzwerk (IBSS)</string>
     <string name="wifi_mode_ibss_short">Ad-Hoc</string>

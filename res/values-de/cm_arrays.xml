@@ -58,6 +58,53 @@
         <item>Klein</item>
         <item>Aus (Standard)</item>
     </string-array>
+    <string-array name="clock_date_display_entries">
+        <item>Ausblenden</item>
+        <item>Klein</item>
+        <item>Normal</item>
+    </string-array>
+    <string-array name="clock_date_style_entries">
+        <item>Normal</item>
+        <item>Kleinbuchstaben</item>
+        <item>Großbuchstaben</item>
+    </string-array>
+    <string-array name="clock_date_format_values">
+        <item>dd/MM/yy</item>
+        <item>MM/dd/yy</item>
+        <item>yyyy-MM-dd</item>
+        <item>yyyy-dd-MM</item>
+        <item>dd-MM-yyyy</item>
+        <item>MM-dd-yyyy</item>
+        <item>MMM dd</item>
+        <item>MMM dd, yyyy</item>
+        <item>MMMM dd, yyyy</item>
+        <item>EEE</item>
+        <item>EEE dd</item>
+        <item>EEE dd/MM</item>
+        <item>EEE MM/dd</item>
+        <item>EEE dd MMM</item>
+        <item>EEE MMM dd</item>
+        <item>EEE MMMM dd</item>
+        <item>EEEE dd/MM</item>
+        <item>EEEE MM/dd</item>
+        <item>Benutzerdefiniertes Java Format</item>
+    </string-array>
+    <string-array name="battery_bar_entries">
+        <item>Deaktiviert</item>
+        <item>Statusleiste</item>
+        <item>Oberhalb der Navigationsleiste</item>
+        <item>Unterhalb der Navigationsleiste</item>
+    </string-array>
+    <string-array name="battery_bar_style_entries">
+        <item>Normal</item>
+        <item>Zentriert-gespiegelt</item>
+    </string-array>
+    <string-array name="notifs_beh_entries">
+        <item>Normal</item>
+        <item>Niemals Expandieren</item>
+        <item>Immer Expandieren</item>
+        <item>Klassisch</item>
+    </string-array>
     <string-array name="wifi_countrycode_entries">
         <item>USA</item>
         <item>Kanada, Taiwan</item>
