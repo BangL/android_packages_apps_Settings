@@ -398,6 +398,7 @@
     <string name="display_rotation_title">Rotation</string>
     <string name="display_rotation_disabled">Disabled</string>
     <string name="display_rotation_unit">degrees</string>
+    <string name="display_lockscreen_rotation_title">Rotate lock screen</string>
     <string name="display_rotation_category_title">Rotation modes</string>
     <string name="display_rotation_0_title">0 degrees</string>
     <string name="display_rotation_90_title">90 degrees</string>
@@ -880,6 +881,8 @@
     <string name="halo_state_white">White list</string>
     <string name="halo_pause_title">HALO pause active app</string>
     <string name="halo_pause_summary">When opening an app with HALO the underlying app will get paused (enabled by default on low memory devices)</string>
+    <string name="halo_gone_title">HALO notification visibility</string>
+    <string name="halo_gone_summary">Completely hide HALO when there are no notifications</string>
 
     <!-- We want HALO popups -->
     <string name="popups_title">Allow floating windows</string>

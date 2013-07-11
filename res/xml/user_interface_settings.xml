@@ -100,6 +100,12 @@
             android:summary="@string/halo_pause_summary"
             android:dependency="halo_enabled" />
 
+        <CheckBoxPreference
+            android:key="halo_gone"
+            android:title="@string/halo_gone_title"
+            android:summary="@string/halo_gone_summary"
+            android:dependency="halo_enabled" />
+
     </PreferenceCategory>
 
 </PreferenceScreen>
