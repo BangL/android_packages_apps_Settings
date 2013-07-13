@@ -1317,6 +1317,18 @@ two in order to insert additional control points. \'Remove\' deletes the selecte
     <!-- Sound settings, charging sounds label for ringtone == none -->
     <string name="power_notifications_ringtone_silent">Silent</string>
 
+    <!-- Auto-Hide Status Bar -->
+    <string name="auto_hide_statusbar">Auto Hide statusbar</string>
+    <string name="auto_hide_statusbar_summary_nonperm">Auto Hide statusbar if no non-permanent notifications are present</string>
+    <string name="auto_hide_statusbar_summary_all">Auto Hide statusbar if no notifications are present</string>
+    <string name="auto_hide_statusbar_off">Off</string>
+    <string name="auto_hide_statusbar_nonperm">Non-permanent only</string>
+    <string name="auto_hide_statusbar_all">All Notifications</string>
+
+    <!-- Statusbar Quick Peek -->
+    <string name="statusbar_quick_peek_title">Quick Peek</string>
+    <string name="statusbar_quick_peek_summary">Peek at statusbar by swiping from top edge of screen</string>
+
     <!-- App Sidebar -->
     <string name="pref_interface_app_sidebar_title">Appbar</string>
     <string name="pref_interface_app_sidebar_summary">Customize your app sidebar</string>
