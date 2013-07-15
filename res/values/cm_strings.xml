@@ -844,6 +844,10 @@
     <!-- Permissions Management -->
     <string name="permissions_settings_title">Permissions Management</string>
 
+    <!-- Network speed -->
+    <string name="show_network_speed">Network speed indicator</string>
+    <string name="show_network_speed_summary">Show network speed in statsbar</string>
+
     <!-- Recents Ram Bar -->
     <string name="ram_bar">Recents RAM bar</string>
     <string name="ram_bar_note_title">Note</string>
