@@ -888,6 +888,15 @@
     <string name="halo_gone_title">HALO notification visibility</string>
     <string name="halo_gone_summary">Completely hide HALO when there are no notifications</string>
 
+    <string name="halo_size_title">HALO size</string>
+    <string name="halo_size_summary">Defines how big HALO is going to be</string>
+    <string name="halo_size_miniscule">Miniscule</string>
+    <string name="halo_size_small">Small</string>
+    <string name="halo_size_default">Default</string>
+    <string name="halo_size_large">Large</string>
+    <string name="halo_size_gigantic">Gigantic</string>
+    <string name="halo_size_monster">Monster</string>
+
     <!-- We want HALO popups -->
     <string name="popups_title">Allow floating windows</string>
     <string name="popups_summary">Controls whether you want floating windows from notification panel</string>
@@ -1363,6 +1372,10 @@ two in order to insert additional control points. \'Remove\' deletes the selecte
     <string name="trigger_top_summary">Adjust the vertical postion of the trigger area</string>
     <string name="trigger_bottom_title">Trigger height</string>
     <string name="trigger_bottom_summary">Adjust the height of the trigger area</string>
+
+    <!-- Screen-On Notification Light -->
+    <string name="screen_on_notification_led_title">Screen-On Notification Light</string>
+    <string name="screen_on_notification_led_summary">Enable Notification Light even when screen is on</string>
 
     <!-- Delete apn confirmation dialog message -->
     <string name="confirm_delete_apn">The APN will be deleted.</string>

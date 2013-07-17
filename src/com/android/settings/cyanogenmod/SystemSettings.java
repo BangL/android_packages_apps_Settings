@@ -53,12 +53,14 @@ public class SystemSettings extends SettingsPreferenceFragment  implements
     private static final String KEY_PIE_CONTROL = "pie_control";
     private static final String KEY_EXPANDED_DESKTOP = "expanded_desktop";
     private static final String KEY_EXPANDED_DESKTOP_NO_NAVBAR = "expanded_desktop_no_navbar";
+    private static final String KEY_SCREEN_ON_NOTIFICATION_LED = "screen_on_notification_led";
 
     private PreferenceScreen mNotificationPulse;
     private PreferenceScreen mBatteryPulse;
     private PreferenceScreen mPieControl;
     private ListPreference mExpandedDesktopPref;
     private CheckBoxPreference mExpandedDesktopNoNavbarPref;
+    private CheckBoxPreference mScreenOnNotificationLed;
 
     private boolean mIsPrimary;
 
@@ -165,6 +167,13 @@ public class SystemSettings extends SettingsPreferenceFragment  implements
 
         // Don't display the lock clock preference if its not installed
         removePreferenceIfPackageNotInstalled(findPreference(KEY_LOCK_CLOCK));
+
+        int statusScreenOnNotificationLed = Settings.System.getInt(getContentResolver(),
+                Settings.System.SCREEN_ON_NOTIFICATION_LED, 1);
+
+        mScreenOnNotificationLed = (CheckBoxPreference) findPreference(KEY_SCREEN_ON_NOTIFICATION_LED);
+        mScreenOnNotificationLed.setChecked(Settings.System.getInt(getActivity().getContentResolver(),
+                Settings.System.SCREEN_ON_NOTIFICATION_LED, 0) == 1);
     }
 
     @Override
@@ -202,6 +211,16 @@ public class SystemSettings extends SettingsPreferenceFragment  implements
         }
 
         return false;
+    }
+
+    @Override
+    public boolean onPreferenceTreeClick(PreferenceScreen preferenceScreen, Preference preference) {
+        if (preference == mScreenOnNotificationLed) {
+            Settings.System.putInt(getActivity().getContentResolver(),
+                    Settings.System.SCREEN_ON_NOTIFICATION_LED,
+                    mScreenOnNotificationLed.isChecked() ? 1 : 0);
+        }
+        return super.onPreferenceTreeClick(preferenceScreen, preference);
     }
 
     private void updateLightPulseDescription() {

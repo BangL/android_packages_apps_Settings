@@ -61,6 +61,7 @@ public class UserInterface extends SettingsPreferenceFragment implements OnPrefe
     private static final String KEY_HALO_STATE = "halo_state";
     private static final String KEY_HALO_HIDE = "halo_hide";
     private static final String KEY_HALO_REVERSED = "halo_reversed";
+    private static final String KEY_HALO_SIZE = "halo_size";
     private static final String KEY_HALO_PAUSE = "halo_pause";
     private static final String KEY_WE_WANT_POPUPS = "show_popup";
     private static final String KEY_HALO_GONE = "halo_gone";
@@ -76,6 +77,7 @@ public class UserInterface extends SettingsPreferenceFragment implements OnPrefe
     private CheckBoxPreference mDualPane;
 
     private ListPreference mHaloState;
+    private ListPreference mHaloSize;
     private CheckBoxPreference mHaloEnabled;
     private CheckBoxPreference mHaloHide;
     private CheckBoxPreference mHaloReversed;
@@ -117,6 +119,16 @@ public class UserInterface extends SettingsPreferenceFragment implements OnPrefe
         mHaloHide = (CheckBoxPreference) prefSet.findPreference(KEY_HALO_HIDE);
         mHaloHide.setChecked(Settings.System.getInt(mContext.getContentResolver(),
                 Settings.System.HALO_HIDE, 0) == 1);
+
+        mHaloSize = (ListPreference) prefSet.findPreference(KEY_HALO_SIZE);
+        try {
+            float haloSize = Settings.System.getFloat(mContext.getContentResolver(),
+                    Settings.System.HALO_SIZE, 1.0f);
+            mHaloSize.setValue(String.valueOf(haloSize));  
+        } catch(Exception ex) {
+            // So what
+        }
+        mHaloSize.setOnPreferenceChangeListener(this);
 
         mHaloReversed = (CheckBoxPreference) prefSet.findPreference(KEY_HALO_REVERSED);
         mHaloReversed.setChecked(Settings.System.getInt(mContext.getContentResolver(),
@@ -258,6 +270,11 @@ public class UserInterface extends SettingsPreferenceFragment implements OnPrefe
             } catch (android.os.RemoteException ex) {
                 // System dead
             }          
+            return true;
+        } else if (preference == mHaloSize) {
+            float haloSize = Float.valueOf((String) newValue);
+            Settings.System.putFloat(getActivity().getContentResolver(),
+                    Settings.System.HALO_SIZE, haloSize);
             return true;
         } else if (preference == mWeWantPopups) {
             Settings.System.putInt(getActivity().getContentResolver(),
