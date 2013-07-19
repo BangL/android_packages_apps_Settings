@@ -848,6 +848,12 @@
     <string name="show_network_speed">Network speed indicator</string>
     <string name="show_network_speed_summary">Show network speed in statusbar</string>
 
+    <!-- Network speed color style -->
+    <string name="network_speed_color_title">Network speed color</string>
+    <string name="network_speed_color_style">Color style</string>
+    <string name="network_speed_style_reset">Reset</string>
+    <string name="network_speed_color_summary">Change the color of network speed indicator</string>
+
     <!-- Recents Ram Bar -->
     <string name="ram_bar">Recents RAM bar</string>
     <string name="ram_bar_note_title">Note</string>
