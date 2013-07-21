@@ -46,10 +46,14 @@ public class StatusBarStyle extends SettingsPreferenceFragment implements
     private static final String PREF_STATUS_BAR_ALPHA = "status_bar_alpha";
     private static final String PREF_STATUS_BAR_ALPHA_MODE = "status_bar_alpha_mode";
     private static final String PREF_STATUS_BAR_COLOR = "status_bar_color";
+    private static final String PREF_STATUS_BAR_LOCKSCREEN_ALPHA_USE = "status_bar_lockscreen_alpha_use";
+    private static final String PREF_STATUS_BAR_LOCKSCREEN_ALPHA = "status_bar_lockscreen_alpha";
 
     private SeekBarPreference mStatusbarTransparency;
     private ColorPickerPreference mStatusBarColor;
     private ListPreference mAlphaMode;
+    private CheckBoxPreference mStatusBarLockscreenAlphaUse;
+    private SeekBarPreference mStatusBarLockscreenAlpha;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -95,6 +99,25 @@ public class StatusBarStyle extends SettingsPreferenceFragment implements
         mAlphaMode.setSummary(mAlphaMode.getEntry());
         mAlphaMode.setOnPreferenceChangeListener(this);
 
+        mStatusBarLockscreenAlphaUse = (CheckBoxPreference) prefs.findPreference(PREF_STATUS_BAR_LOCKSCREEN_ALPHA_USE);
+        mStatusBarLockscreenAlphaUse.setChecked((
+                Settings.System.getInt(getActivity().getApplicationContext().getContentResolver(),
+                Settings.System.STATUS_BAR_LOCKSCREEN_ALPHA_USE, 0) == 1));
+
+        float statBarLockscreenTransparency = 0.0f;
+        try{
+            statBarLockscreenTransparency = Settings.System.getFloat(getActivity()
+                 .getContentResolver(), Settings.System.STATUS_BAR_LOCKSCREEN_ALPHA);
+        } catch (Exception e) {
+            statBarLockscreenTransparency = 0.0f;
+            Settings.System.putFloat(getActivity().getContentResolver(),
+                    Settings.System.STATUS_BAR_LOCKSCREEN_ALPHA, 0.0f);
+        }
+        mStatusBarLockscreenAlpha = (SeekBarPreference) findPreference(PREF_STATUS_BAR_LOCKSCREEN_ALPHA);
+        mStatusBarLockscreenAlpha.setProperty(Settings.System.STATUS_BAR_LOCKSCREEN_ALPHA);
+        mStatusBarLockscreenAlpha.setInitValue((int) (statBarLockscreenTransparency * 100));
+        mStatusBarLockscreenAlpha.setOnPreferenceChangeListener(this);
+
         setHasOptionsMenu(true);
     }
 
@@ -116,6 +139,11 @@ public class StatusBarStyle extends SettingsPreferenceFragment implements
                 Settings.System.putFloat(getActivity().getContentResolver(),
                        Settings.System.STATUS_BAR_ALPHA, 0.0f);
 
+                Settings.System.putInt(getActivity().getContentResolver(),
+                       Settings.System.STATUS_BAR_LOCKSCREEN_ALPHA_USE, 0);
+                Settings.System.putFloat(getActivity().getContentResolver(),
+                       Settings.System.STATUS_BAR_LOCKSCREEN_ALPHA, 0.0f);
+
                 refreshSettings();
                 return true;
              default:
@@ -126,6 +154,12 @@ public class StatusBarStyle extends SettingsPreferenceFragment implements
     @Override
     public boolean onPreferenceTreeClick(PreferenceScreen preferenceScreen,
             Preference preference) {
+        if (preference == mStatusBarLockscreenAlphaUse) {
+            Settings.System.putInt(getActivity().getApplicationContext().getContentResolver(),
+                    Settings.System.STATUS_BAR_LOCKSCREEN_ALPHA_USE,
+                    mStatusBarLockscreenAlphaUse.isChecked() ? 1 : 0);
+            return true;
+        }
         return super.onPreferenceTreeClick(preferenceScreen, preference);
     }
 
@@ -151,6 +185,12 @@ public class StatusBarStyle extends SettingsPreferenceFragment implements
             Settings.System.putInt(getActivity().getContentResolver(),
                     Settings.System.STATUS_BAR_ALPHA_MODE, alphaMode);
             mAlphaMode.setSummary(mAlphaMode.getEntries()[index]);
+            return true;
+        } else if (preference == mStatusBarLockscreenAlpha) {
+            float valStat = Float.parseFloat((String) newValue);
+            Settings.System.putFloat(getActivity().getContentResolver(),
+                    Settings.System.STATUS_BAR_LOCKSCREEN_ALPHA,
+                    valStat / 100);
             return true;
         }
         return false;

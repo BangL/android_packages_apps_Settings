@@ -32,6 +32,17 @@
              android:key="status_bar_alpha"
              android:title="@string/status_bar_transparency_title" />
 
+        <CheckBoxPreference
+            android:key="status_bar_lockscreen_alpha_use"
+            android:title="@string/status_bar_lockscreen_alpha_use_title"
+            android:summary="@string/status_bar_lockscreen_alpha_use_summary"
+            android:defaultValue="false" />
+
+        <com.android.settings.widget.SeekBarPreference
+            android:key="status_bar_lockscreen_alpha"
+            android:title="@string/status_bar_lockscreen_alpha_title"
+            android:dependency="status_bar_lockscreen_alpha_use" />
+
         <ListPreference
             android:key="status_bar_alpha_mode"
             android:dialogTitle="@string/status_bar_alpha_mode_dialog_text_title"
