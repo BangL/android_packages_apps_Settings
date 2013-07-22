@@ -64,7 +64,6 @@ public class UserInterface extends SettingsPreferenceFragment implements OnPrefe
     private static final String KEY_HALO_SIZE = "halo_size";
     private static final String KEY_HALO_PAUSE = "halo_pause";
     private static final String KEY_WE_WANT_POPUPS = "show_popup";
-    private static final String KEY_HALO_GONE = "halo_gone";
 
     private Preference mLcdDensity;
     private Preference mCustomLabel;
@@ -83,7 +82,6 @@ public class UserInterface extends SettingsPreferenceFragment implements OnPrefe
     private CheckBoxPreference mHaloReversed;
     private CheckBoxPreference mHaloPause;
     private CheckBoxPreference mWeWantPopups;
-    private CheckBoxPreference mHaloGone;
 
     private boolean mIsCrtOffChecked = false;
 
@@ -133,10 +131,6 @@ public class UserInterface extends SettingsPreferenceFragment implements OnPrefe
         mHaloReversed = (CheckBoxPreference) prefSet.findPreference(KEY_HALO_REVERSED);
         mHaloReversed.setChecked(Settings.System.getInt(mContext.getContentResolver(),
                 Settings.System.HALO_REVERSED, 1) == 1);
-
-        mHaloGone = (CheckBoxPreference) prefSet.findPreference(KEY_HALO_GONE);
-        mHaloGone.setChecked(Settings.System.getInt(mContext.getContentResolver(),
-                Settings.System.HALO_GONE, 0) == 1);
 
         int isLowRAM = (ActivityManager.isLargeRAM()) ? 0 : 1;
         mHaloPause = (CheckBoxPreference) prefSet.findPreference(KEY_HALO_PAUSE);
@@ -308,10 +302,6 @@ public class UserInterface extends SettingsPreferenceFragment implements OnPrefe
          } else if (preference == mHaloPause) {
             Settings.System.putInt(mContext.getContentResolver(),
                     Settings.System.HALO_PAUSE, mHaloPause.isChecked()
-                    ? 1 : 0);
-        } else if (preference == mHaloGone) {
-            Settings.System.putInt(mContext.getContentResolver(),
-                    Settings.System.HALO_GONE, mHaloGone.isChecked()
                     ? 1 : 0);
         } else if (preference == mCustomLabel) {
             AlertDialog.Builder alert = new AlertDialog.Builder(getActivity());
