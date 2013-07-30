@@ -163,7 +163,7 @@
     <!-- System Interface settings  -->
     <string name="system_settings_title">System</string>
     <string name="system_interface_title">System interface</string>
- 
+
     <string name="lock_screen_title">Lock screen</string>
 
     <!-- Lock Screen Shortcuts -->
@@ -589,7 +589,6 @@
     <!-- Power Widget  -->
     <string name="power_widget_title">Power widget</string>
     <string name="title_expanded_widget">Power widget</string>
-    <string name="power_widget_behavior">Power widget behavior</string>
     <string name="title_expanded_hide_onchange">Close drawer on change</string>
     <string name="title_expanded_hide_indicator">Hide indicators</string>
     <string name="title_expanded_hide_scrollbar">Hide scrollbar</string>
@@ -643,6 +642,14 @@
 
     <!-- Notification drawer settings  -->
     <string name="notification_drawer_title">Notification drawer</string>
+    <string name="notification_drawer_behaviour_title">Behaviour</string>
+    <string name="notification_drawer_collapse_on_dismiss_title">Auto-close drawer</string>
+    <string name="collapse_on_dismiss_never">Disabled</string>
+    <string name="collapse_on_dismiss_if_empty">If none remaining</string>
+    <string name="collapse_on_dismiss_if_no_clearable">If no removable remaining</string>
+    <string name="collapse_on_dismiss_never_summary">Leave notification tray open when removing notifications</string>
+    <string name="collapse_on_dismiss_if_empty_summary">Close notification tray when removing the last notification</string>
+    <string name="collapse_on_dismiss_if_no_clearable_summary">Close notification tray when removing the last removable notification</string>
     <string name="notification_style_grouptitle">Style</string>
     <string name="notification_style_title">Notification drawer style</string>
     <string name="notification_style_summary">Change your notification drawer style</string>
@@ -960,6 +967,8 @@
     <string name="status_bar_battery_status_percentage">Percentage</string>
     <string name="status_bar_battery_status_circle">Circle</string>
     <string name="status_bar_battery_status_circle_percentage">Circle with percentage</string>
+    <string name="status_bar_notif_count_title">Show notification count</string>
+    <string name="status_bar_notif_count_summary">Display number of pending notifications</string>
 
     <!-- Status bar | Clock -->
     <string name="status_bar_clock">Clock and date</string>
@@ -992,10 +1001,6 @@
     <string name="title_keyboard_input">Keyboard and input methods</string>
     <string name="disable_fullscreen_keyboard_title">Disable fullscreen keyboard</string>
     <string name="disable_fullscreen_keyboard_summary">Landscape keyboard will never take up entire screen</string>
-
-    <!-- Status bar notification count -->
-    <string name="status_bar_notif_count_title">Show notification count</string>
-    <string name="status_bar_notif_count_summary">Display number of pending notifications</string>
 
     <!-- Notification shade dimming -->
     <string name="notification_shade_dim_title">Dim notification shade</string>
