@@ -199,46 +199,38 @@ public class StatusBar extends SettingsPreferenceFragment implements OnPreferenc
                     Settings.System.STATUSBAR_BATTERY_BAR_COLOR, intHex);
             return true;
         } else if (preference == mBatteryBar) {
-            int val = Integer.parseInt((String) newValue);
-            return Settings.System.putInt(resolver,
-                    Settings.System.STATUSBAR_BATTERY_BAR, val);
+            int val = Integer.valueOf((String) newValue);
+            return Settings.System.putInt(resolver, Settings.System.STATUSBAR_BATTERY_BAR, val);
         } else if (preference == mBatteryBarStyle) {
-            int val = Integer.parseInt((String) newValue);
-            return Settings.System.putInt(resolver,
-                    Settings.System.STATUSBAR_BATTERY_BAR_STYLE, val);
+            int val = Integer.valueOf((String) newValue);
+            return Settings.System.putInt(resolver, Settings.System.STATUSBAR_BATTERY_BAR_STYLE, val);
         } else if (preference == mBatteryBarThickness) {
-            int val = Integer.parseInt((String) newValue);
-            return Settings.System.putInt(resolver,
-                    Settings.System.STATUSBAR_BATTERY_BAR_THICKNESS, val);
+            int val = Integer.valueOf((String) newValue);
+            return Settings.System.putInt(resolver, Settings.System.STATUSBAR_BATTERY_BAR_THICKNESS, val);
         } else if (preference == mStatusBarAutoHide) {
             int statusBarAutoHideValue = Integer.valueOf((String) newValue);
-            Settings.System.putInt(getActivity().getApplicationContext().getContentResolver(),
-                    Settings.System.AUTO_HIDE_STATUSBAR, statusBarAutoHideValue);
+            Settings.System.putInt(resolver, Settings.System.AUTO_HIDE_STATUSBAR, statusBarAutoHideValue);
             updateStatusBarAutoHideSummary(statusBarAutoHideValue);
             return true;
         } else if (preference == mStatusBarBrightnessControl) {
             boolean value = (Boolean) newValue;
-            Settings.System.putInt(resolver,
-                    Settings.System.STATUS_BAR_BRIGHTNESS_CONTROL, value ? 1 : 0);
+            Settings.System.putInt(resolver, Settings.System.STATUS_BAR_BRIGHTNESS_CONTROL, value ? 1 : 0);
             return true;
         } else if (preference == mStatusBarNotifCount) {
             boolean value = (Boolean) newValue;
             Settings.System.putInt(resolver, Settings.System.STATUS_BAR_NOTIF_COUNT, value ? 1 : 0);
             return true;
         } else if (preference == mBatteryBarChargingAnimation) {
-            Settings.System.putInt(resolver,
-                    Settings.System.STATUSBAR_BATTERY_BAR_ANIMATE,
-                    ((CheckBoxPreference) preference).isChecked() ? 1 : 0);
+            boolean value = (Boolean) newValue;
+            Settings.System.putInt(resolver, Settings.System.STATUSBAR_BATTERY_BAR_ANIMATE, value ? 1 : 0);
             return true;
         } else if (preference == mStatusBarQuickPeek) {
-            value = mStatusBarQuickPeek.isChecked();
-            Settings.System.putInt(getActivity().getApplicationContext().getContentResolver(),
-                    Settings.System.STATUSBAR_PEEK, value ? 1 : 0);
+            boolean value = (Boolean) newValue;
+            Settings.System.putInt(resolver, Settings.System.STATUSBAR_PEEK, value ? 1 : 0);
             return true;
         } else if (preference == mStatusBarTraffic) {
-            value = mStatusBarTraffic.isChecked();
-            Settings.System.putInt(getActivity().getApplicationContext().getContentResolver(),
-                    Settings.System.STATUS_BAR_TRAFFIC, value ? 1 : 0);
+            boolean value = (Boolean) newValue;
+            Settings.System.putInt(resolver, Settings.System.STATUS_BAR_TRAFFIC, value ? 1 : 0);
             return true;
         }
         return false;
