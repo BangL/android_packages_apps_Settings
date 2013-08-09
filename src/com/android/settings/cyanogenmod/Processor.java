@@ -45,6 +45,12 @@ public class Processor extends SettingsPreferenceFragment implements
     public static final String FREQ_LIST_FILE = "/sys/devices/system/cpu/cpu0/cpufreq/scaling_available_frequencies";
     public static String FREQ_MAX_FILE = null;
     public static String FREQ_MIN_FILE = null;
+    // Tegra2 hack start
+    public static final String SEC_GOV_FILE = "/sys/devices/system/cpu/cpu1/cpufreq/scaling_governor";
+    public static final String FREQ_SEC_MIN_FILE = "/sys/devices/system/cpu/cpu1/cpufreq/scaling_min_freq";
+    public static final String FREQ_SEC_MAX_FILE = "/sys/devices/system/cpu/cpu1/cpufreq/scaling_max_freq";
+    public static final String FREQ_USR_CAP_FILE = "/sys/module/cpu_tegra/parameters/cpu_user_cap";
+    // Tegra2 hack end
     public static final String SOB_PREF = "pref_cpu_set_on_boot";
 
     protected static boolean freqCapFilesInitialized = false;
@@ -232,10 +238,36 @@ public class Processor extends SettingsPreferenceFragment implements
         if (newValue != null) {
             if (preference == mGovernorPref) {
                 fname = GOV_FILE;
+                // Tegra2 hack start
+                if (Utils.fileExists(SEC_GOV_FILE)) {
+                    if (Utils.fileWriteOneLine(SEC_GOV_FILE, (String) newValue) == false) {
+                        return false;
+                    }
+                }
+                // Tegra2 hack end
             } else if (preference == mMinFrequencyPref) {
                 fname = FREQ_MIN_FILE;
+                // Tegra2 hack start
+                if (Utils.fileExists(FREQ_SEC_MIN_FILE)) {
+                    if (Utils.fileWriteOneLine(FREQ_SEC_MAX_FILE, (String) newValue) == false) {
+                        return false;
+                    }
+                }
+                // Tegra2 hack end
             } else if (preference == mMaxFrequencyPref) {
                 fname = FREQ_MAX_FILE;
+                // Tegra2 hack start
+                if (Utils.fileExists(FREQ_USR_CAP_FILE)) {
+                    if (Utils.fileWriteOneLine(FREQ_USR_CAP_FILE, (String) newValue) == false) {
+                        return false;
+                    }
+                }
+                if (Utils.fileExists(FREQ_SEC_MAX_FILE)) {
+                    if (Utils.fileWriteOneLine(FREQ_SEC_MAX_FILE, (String) newValue) == false) {
+                        return false;
+                    }
+                }
+                // Tegra2 hack end
             }
 
             if (Utils.fileWriteOneLine(fname, (String) newValue)) {
