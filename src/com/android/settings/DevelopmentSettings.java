@@ -621,6 +621,7 @@ public class DevelopmentSettings extends PreferenceFragment
         }
         resetDebuggerOptions();
         resetRootAccessOptions();
+
         resetAdbNotifyOptions();
         resetVerifyAppsOverUsbOptions();
         resetMSOBOptions();
