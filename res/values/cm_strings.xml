@@ -865,6 +865,7 @@
     <string name="status_bar_style_hidden">Hidden</string>
     <string name="status_bar_signal_text_show_text">Text</string>
     <string name="status_bar_battery_status_percentage">Percentage</string>
+    <string name="status_bar_battery_status_percentage_only">Percentage only</string>
     <string name="status_bar_battery_status_circle">Circle</string>
     <string name="status_bar_battery_status_circle_percentage">Circle with percentage</string>
 
