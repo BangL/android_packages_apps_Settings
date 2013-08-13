@@ -38,7 +38,11 @@ public class KeyboardInputSettings extends SettingsPreferenceFragment implements
 
     private static final String PREF_DISABLE_FULLSCREEN_KEYBOARD = "disable_fullscreen_keyboard";
 
+    private static final String SHOW_ENTER_KEY = "show_enter_key";
+
     CheckBoxPreference mDisableFullscreenKeyboard;
+
+    private CheckBoxPreference mShowEnterKey;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -49,6 +53,10 @@ public class KeyboardInputSettings extends SettingsPreferenceFragment implements
         mDisableFullscreenKeyboard = (CheckBoxPreference) findPreference(PREF_DISABLE_FULLSCREEN_KEYBOARD);
         mDisableFullscreenKeyboard.setChecked(Settings.System.getInt(getActivity().getContentResolver(),
                 Settings.System.DISABLE_FULLSCREEN_KEYBOARD, 0) == 1);
+
+        mShowEnterKey = (CheckBoxPreference) findPreference(SHOW_ENTER_KEY);
+        mShowEnterKey.setChecked(Settings.System.getInt(getActivity().getContentResolver(),
+                Settings.System.FORMAL_TEXT_INPUT, 0) == 1);
 
     }
 
@@ -68,6 +76,10 @@ public class KeyboardInputSettings extends SettingsPreferenceFragment implements
             boolean checked = ((CheckBoxPreference) preference).isChecked();
             Settings.System.putInt(getActivity().getContentResolver(),
                     Settings.System.DISABLE_FULLSCREEN_KEYBOARD, checked ? 1 : 0);
+            return true;
+        } else if (preference == mShowEnterKey) {
+            Settings.System.putInt(getActivity().getContentResolver(),
+                Settings.System.FORMAL_TEXT_INPUT, mShowEnterKey.isChecked() ? 1 : 0);
             return true;
         }
         return super.onPreferenceTreeClick(preferenceScreen, preference);

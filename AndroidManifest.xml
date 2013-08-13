@@ -1756,6 +1756,14 @@
 
         <activity android:name=".cyanogenmod.KeyboardInputSettings" />
 
+        <activity
+            android:name=".DensityChanger"
+            android:label="@string/lcd_density_wizard" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+            </intent-filter>
+        </activity>
+
         <activity android:name=".profiles.NFCProfile"
                 android:theme="@android:style/Theme.NoDisplay">
             <intent-filter>

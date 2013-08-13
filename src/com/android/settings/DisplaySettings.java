@@ -72,9 +72,9 @@ public class DisplaySettings extends SettingsPreferenceFragment implements
     private static final String KEY_HOME_WAKE = "pref_home_wake";
     private static final String KEY_VOLUME_WAKE = "pref_volume_wake";
     private static final String KEY_SCREEN_OFF_ANIMATION = "screen_off_animation";
-    private static final String KEY_DUAL_PANEL = "force_dualpanel";
+    private static final String KEY_WAKEUP_WHEN_PLUGGED_UNPLUGGED = "wakeup_when_plugged_unplugged";
+    private static final String KEY_DUAL_PANEL = "force_dualpanel"; 
     private static final String KEY_DISPLAY_COLOR = "color_calibration";
-    private static final String KEY_WAKE_WHEN_PLUGGED_OR_UNPLUGGED = "wake_when_plugged_or_unplugged";
 
     // Strings used for building the summary
     private static final String ROTATION_ANGLE_0 = "0";
@@ -88,8 +88,10 @@ public class DisplaySettings extends SettingsPreferenceFragment implements
 
     private CheckBoxPreference mHomeWake;
     private CheckBoxPreference mVolumeWake;
+
     private CheckBoxPreference mDualPanel; 
-    private CheckBoxPreference mWakeWhenPluggedOrUnplugged;
+    private CheckBoxPreference mWakeUpWhenPluggedOrUnplugged;
+
     private PreferenceScreen mDisplayRotationPreference;
     private WarnedListPreference mFontSizePref;
 
@@ -212,19 +214,13 @@ public class DisplaySettings extends SettingsPreferenceFragment implements
         mDualPanel = (CheckBoxPreference) findPreference(KEY_DUAL_PANEL);
         mDualPanel.setChecked(Settings.System.getBoolean(getContentResolver(), Settings.System.FORCE_DUAL_PANEL, false));
 
+        mWakeUpWhenPluggedOrUnplugged = (CheckBoxPreference) findPreference(KEY_WAKEUP_WHEN_PLUGGED_UNPLUGGED);
+        mWakeUpWhenPluggedOrUnplugged.setChecked(Settings.System.getInt(getActivity().getContentResolver(),
+                        Settings.System.WAKEUP_WHEN_PLUGGED_UNPLUGGED, 1) == 1);
+
         if (!DisplayColor.isSupported()) {
             removePreference(KEY_DISPLAY_COLOR);
         }
-
-        // Default value for wake-on-plug behavior from config.xml
-        boolean wakeUpWhenPluggedOrUnpluggedConfig = res.getBoolean(
-                com.android.internal.R.bool.config_unplugTurnsOnScreen);
-
-        mWakeWhenPluggedOrUnplugged =
-                (CheckBoxPreference) findPreference(KEY_WAKE_WHEN_PLUGGED_OR_UNPLUGGED);
-        mWakeWhenPluggedOrUnplugged.setChecked(Settings.Global.getInt(resolver,
-                Settings.Global.WAKE_WHEN_PLUGGED_OR_UNPLUGGED,
-                (wakeUpWhenPluggedOrUnpluggedConfig ? 1 : 0)) == 1);
     }
 
     private void updateDisplayRotationPreferenceDescription() {
@@ -471,10 +467,10 @@ public class DisplaySettings extends SettingsPreferenceFragment implements
         } else if (preference == mDualPanel) {
             Settings.System.putBoolean(getContentResolver(), Settings.System.FORCE_DUAL_PANEL, ((CheckBoxPreference) preference).isChecked());
             return true;
-        } else if (preference == mWakeWhenPluggedOrUnplugged) {
-            Settings.Global.putInt(getContentResolver(),
-                    Settings.Global.WAKE_WHEN_PLUGGED_OR_UNPLUGGED,
-                    mWakeWhenPluggedOrUnplugged.isChecked() ? 1 : 0);
+        } else if (preference == mWakeUpWhenPluggedOrUnplugged) {
+            Settings.System.putInt(getActivity().getContentResolver(),
+                    Settings.System.WAKEUP_WHEN_PLUGGED_UNPLUGGED,
+                    mWakeUpWhenPluggedOrUnplugged.isChecked() ? 1 : 0);
             return true;
         }
         return super.onPreferenceTreeClick(preferenceScreen, preference);
