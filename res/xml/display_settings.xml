@@ -58,6 +58,13 @@
                 android:title="@string/wifi_display_settings_title"
                 android:fragment="com.android.settings.wfd.WifiDisplaySettings" />
 
+        <com.android.settings.cyanogenmod.DisplayColor
+                android:key="color_calibration"
+                android:title="@string/color_calibration_title"
+                android:dialogTitle="@string/color_calibration_title"
+                android:summary="@string/color_calibration_summary"
+                android:persistent="false" />
+
         <CheckBoxPreference
             android:key="screen_off_animation"
             android:title="@string/screen_off_animation_title"
@@ -87,10 +94,10 @@
                 android:defaultValue="false" />
 
             <CheckBoxPreference
-                android:key="wakeup_when_plugged_unplugged"
-                android:title="@string/wakeup_when_plugged_unplugged_title"
-                android:summary="@string/wakeup_when_plugged_unplugged_summary"
-                android:defaultValue="true" />
+                android:key="wake_when_plugged_or_unplugged"
+                android:title="@string/wake_when_plugged_or_unplugged_title"
+                android:summary="@string/wake_when_plugged_or_unplugged_summary"
+                android:defaultValue="false" />
 
         </PreferenceCategory>
 
